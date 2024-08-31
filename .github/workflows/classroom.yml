@@ -1,0 +1,228 @@
+name: Autograding Tests
+'on':
+- workflow_dispatch
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: 'palindrome #2'
+      id: palindrome-2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: 'palindrome #2'
+        setup-command: ''
+        command: python3 palindrome.py
+        input: sirap i paris
+        expected-output: 'True'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+    - name: 'palindrome #3'
+      id: palindrome-3
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: 'palindrome #3'
+        setup-command: ''
+        command: python3 palindrome.py
+        input: trolldom
+        expected-output: 'False'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+    - name: 'palindrome #4'
+      id: palindrome-4
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: 'palindrome #4'
+        setup-command: ''
+        command: python3 palindrome.py
+        input: trollort
+        expected-output: 'True'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+    - name: vowel
+      id: vowel
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: vowel
+        setup-command: ''
+        command: python3 vowel_count.py
+        input: hello world
+        expected-output: '3'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+    - name: 'vowel #2'
+      id: vowel-2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: 'vowel #2'
+        setup-command: ''
+        command: python3 vowel_count.py
+        input: gymnasium
+        expected-output: '3'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+    - name: 'palindrome #1'
+      id: palindrome-1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: 'palindrome #1'
+        setup-command: ''
+        command: python3 palindrome.py
+        input: racecar
+        expected-output: 'True'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+    - name: 'vowel #3'
+      id: vowel-3
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: 'vowel #3'
+        setup-command: ''
+        command: python3 vowel_count.py
+        input: aeiouAEIOU
+        expected-output: 'True'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+    - name: 'c to f #1'
+      id: c-to-f-1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: 'c to f #1'
+        setup-command: ''
+        command: python3 c_to_f_cov.py
+        input: '0'
+        expected-output: '32.00'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+    - name: 'c to f #2'
+      id: c-to-f-2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: 'c to f #2'
+        setup-command: ''
+        command: python3 c_to_f_cov.py
+        input: '100'
+        expected-output: '212.00'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+    - name: 'c to f #3'
+      id: c-to-f-3
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: 'c to f #3'
+        setup-command: ''
+        command: python3 c_to_f_cov.py
+        input: "-273.15"
+        expected-output: "-459.67"
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+    - name: 'maxdiff #1'
+      id: maxdiff-1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: 'maxdiff #1'
+        setup-command: ''
+        command: python3 c_to_f_cov.py
+        input: 10, 3, 5, 6
+        expected-output: '7'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+    - name: 'maxdiff #2'
+      id: maxdiff-2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: 'maxdiff #2'
+        setup-command: ''
+        command: python3 c_to_f_cov.py
+        input: 4, 4, 4
+        expected-output: '0'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+    - name: 'maxdiff #3'
+      id: maxdiff-3
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: 'maxdiff #3'
+        setup-command: ''
+        command: python3 c_to_f_cov.py
+        input: 1, -2, 3, 7, -5
+        expected-output: '12'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+    - name: 'mean #1'
+      id: mean-1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: 'mean #1'
+        setup-command: ''
+        command: python3 mean_value.py
+        input: 1, 2, 3, 4, 5
+        expected-output: '3.0'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+    - name: 'mean #2'
+      id: mean-2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: 'mean #2'
+        setup-command: ''
+        command: python3 mean_value.py
+        input: 10, 20, 30
+        expected-output: '20.0'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+    - name: 'mean #3'
+      id: mean-3
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: 'mean #3'
+        setup-command: ''
+        command: python3 mean_value.py
+        input: '42'
+        expected-output: '42'
+        comparison-method: exact
+        timeout: 10
+        max-score: 1
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        PALINDROME-2_RESULTS: "${{steps.palindrome-2.outputs.result}}"
+        PALINDROME-3_RESULTS: "${{steps.palindrome-3.outputs.result}}"
+        PALINDROME-4_RESULTS: "${{steps.palindrome-4.outputs.result}}"
+        VOWEL_RESULTS: "${{steps.vowel.outputs.result}}"
+        VOWEL-2_RESULTS: "${{steps.vowel-2.outputs.result}}"
+        PALINDROME-1_RESULTS: "${{steps.palindrome-1.outputs.result}}"
+        VOWEL-3_RESULTS: "${{steps.vowel-3.outputs.result}}"
+        C-TO-F-1_RESULTS: "${{steps.c-to-f-1.outputs.result}}"
+        C-TO-F-2_RESULTS: "${{steps.c-to-f-2.outputs.result}}"
+        C-TO-F-3_RESULTS: "${{steps.c-to-f-3.outputs.result}}"
+        MAXDIFF-1_RESULTS: "${{steps.maxdiff-1.outputs.result}}"
+        MAXDIFF-2_RESULTS: "${{steps.maxdiff-2.outputs.result}}"
+        MAXDIFF-3_RESULTS: "${{steps.maxdiff-3.outputs.result}}"
+        MEAN-1_RESULTS: "${{steps.mean-1.outputs.result}}"
+        MEAN-2_RESULTS: "${{steps.mean-2.outputs.result}}"
+        MEAN-3_RESULTS: "${{steps.mean-3.outputs.result}}"
+      with:
+        runners: palindrome-2,palindrome-3,palindrome-4,vowel,vowel-2,palindrome-1,vowel-3,c-to-f-1,c-to-f-2,c-to-f-3,maxdiff-1,maxdiff-2,maxdiff-3,mean-1,mean-2,mean-3
